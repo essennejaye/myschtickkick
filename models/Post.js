@@ -29,7 +29,6 @@ Post.init(
         validate: {
           len: [1]
         }
-        
       }
     },
     {
