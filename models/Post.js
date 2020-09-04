@@ -22,6 +22,14 @@ Post.init(
           model: 'user',
           key: 'id'
         }
+      },
+      post_text: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          len: [1]
+        }
+        
       }
     },
     {
@@ -32,3 +40,5 @@ Post.init(
     }
    
 )
+
+module.exports = Post
