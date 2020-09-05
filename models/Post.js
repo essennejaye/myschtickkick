@@ -29,6 +29,9 @@ Post.init(
         validate: {
           len: [1]
         }
+      },
+      image: {
+        type: DataTypes.BLOB('long')
       }
     },
     {
