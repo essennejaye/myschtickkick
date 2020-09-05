@@ -19,7 +19,7 @@ const sequelize = require('./config/connection');
 //     })
 //   };
 
-// const routes = require('./controllers');
+const routes = require('./controllers');
 // const helpers = require('./utils/helpers');
 // const hbs = exphbs.create({helpers});
 
@@ -34,10 +34,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, 'public'))); // path to static css and js files
 // turn on routes
-// app.use(routes);
+app.use(routes);
 
 // turn on connection to db and server
-sequelize.sync({ force: true})
+sequelize.sync({ force: false})
 .then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
