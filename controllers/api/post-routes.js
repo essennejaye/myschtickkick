@@ -2,6 +2,10 @@ const router = require('express').Router();
 const { Post, User } = require('../../models');
 const sequelize = require('../../config/connection');
 
+app.use(fileUpload({
+    limits: { fileSize: 250 * 250 * 250 },
+  }));
+
 router.get('/', (req, res) => {
     console.log('===========');
     Post.findAll({
@@ -68,6 +72,23 @@ router.post('/', (req, res) => {
             res.status(500).json(err);
         });
 });
+
+app.post('/upload', function(req, res) {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send('No files were uploaded.');
+    }
+  
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    let sampleFile = req.files.sampleFile;
+  
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv('../public/uploads/filename.jpg', function(err) {
+      if (err)
+        return res.status(500).send(err);
+  
+      res.send('File uploaded!');
+    });
+  });
 
 router.put('/:id', (req, res) => {
     Post.update(
