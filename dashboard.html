@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>My Schtick Kick</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <!--NAV BAR-->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">My Shtick Kick</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                <a class="nav-link" href="/">Home</a>
+
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+
+                <a class="nav-link" href="#" id="logout-link">Logout</a>
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+    <!--HERO/JUMBOTRON-->
+    <header class="jumbotron jumbotron-fluid" style="background-color: rgb(196, 93, 9);">
+        <div class="container">
+            <h1 class="display-4 font-weight-bold">Your Dashboard</h1>
+        </div>
+    </header>
+
+    <!--Create Post-->
+
+    <form id="new-post-form" class="mx-auto col-auto" style="width: 700px;">
+        <div class="card text-dark  mb-9" style="max-width: 50rem;">
+            <div class="card-header bg-dark text-white">Edit Post</div>
+            <div class="card-body">
+
+                <input type="hidden" name="post-id" value="{{post.id}}" />
+
+                <div class="form-group col-auto">
+                    <label class="form-label" for="post-title">Title</label>
+                    <input type="text" name="post-title" value="{{post.title}}" class="form-control" />
+                </div>
+
+
+                <div class="form-group col-auto">
+                    <label class="form-label" for="post-body">Description</label>
+                    <textarea name="post-body" class="form-control">{{post.body}}</textarea>
+                </div>
+
+
+                <div class="form-group col-auto">
+                    <label for="exampleFormControlFile1">Upload Picture</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+
+
+                <button type="submit" class="btn btn-block btn-dark">UPDATE</button>
+                <button type="submit" class="btn btn-block btn-dark" id="delete-btn">DELETE</button>
+
+
+            </div>
+        </div>
+    </form>
+
+    <script src="/javascript/edit.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
