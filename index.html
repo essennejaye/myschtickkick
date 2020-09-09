@@ -61,20 +61,22 @@
         <div class="card text-white bg-danger mb-9" style="max-width: 50rem;">
             <div class="card-header bg-dark">Login</div>
             <div class="card-body">
-                <div class="form-group col-auto">
-                    <label for="exampleInputEmail1">Email address:</label>
-                    <input type="email" class="form-control col-md-12" id="exampleInputEmail1"
-                        aria-describedby="emailHelp">
 
-                </div>
                 <div class="form-group col-auto">
-                    <label for="exampleInputPassword1">Password:</label>
-                    <input type="password" class="form-control col-md-12" id="exampleInputPassword1">
+                    <label for="username-input-login">Username:</label>
+                    <input type="text" class="form-control col-md-12" id="username-input-login">
                 </div>
+
+                <div class="form-group col-auto">
+                    <label for="password-input-login">Password:</label>
+                    <input type="password" class="form-control col-md-12" id="password-input-login">
+                </div>
+
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-dark ">Login</button>
+                    <button type="submit" class="btn btn-dark btn-block" id="login-btn">Login!</button>
                 </div>
             </div>
+
             <div class="col-auto">
                 <a type="button" href="/signup" class="text-white">Sign Up</a>
             </div>
@@ -86,20 +88,22 @@
         <div class="card text-white bg-danger mb-9" style="max-width: 50rem;">
             <div class="card-header bg-dark">Sign Up</div>
             <div class="card-body">
-                <div class="form-group col-auto">
-                    <label for="exampleInputEmail1">Email address:</label>
-                    <input type="email" class="form-control col-md-12" id="exampleInputEmail1"
-                        aria-describedby="emailHelp">
 
-                </div>
                 <div class="form-group col-auto">
-                    <label for="exampleInputPassword1">Password:</label>
-                    <input type="password" class="form-control col-md-12" id="exampleInputPassword1">
+                    <label for="username-input-signup">Username:</label>
+                    <input type="text" class="form-control col-md-12" id="username-input-signup">
                 </div>
+
+                <div class="form-group col-auto">
+                    <label for="password-input-signup">Password:</label>
+                    <input type="password" class="form-control col-md-12" id="password-input-signup">
+                </div>
+
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-dark ">Sign Up</button>
+                    <button type="submit" class="btn btn-dark btn-block" id="signup-btn">Sign Up!</button>
                 </div>
             </div>
+
             <div class="col-auto">
                 <a type="button" href="/login" class="text-white">Login</a>
             </div>
@@ -124,6 +128,7 @@
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, dolor molestias unde ipsa
                         est rerum cupiditate blanditiis aut, culpa quo id! Mollitia soluta laudantium aspernatur aliquid
                         modi asperiores numquam quisquam!</p>
+                    <small>Posted by {{User.username}} on {{format_date createdAt}}</small><br>
                     <a href="#">Click Here For More Info!</a>
                 </div>
             </div>
@@ -182,8 +187,17 @@
     </div>
 
 
-
-
+    <!--POST ON DASHBOARD-->
+    <div class="list-group col-md-9 mx-auto">
+        {{#each posts}}
+        <a href="/dashboard/edit/{{id}}" class="list-group-item my-1">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{title}}</h5>
+                <small>{{format_date createdAt}}</small>
+            </div>
+        </a>
+        {{/each}}
+    </div>
 
 
 
