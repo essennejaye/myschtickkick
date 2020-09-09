@@ -46,40 +46,31 @@
         </div>
     </header>
 
-    <!--Create Post-->
-
-    <form id="new-post-form" class="mx-auto col-auto" style="width: 700px;">
-        <div class="card text-dark  mb-9" style="max-width: 50rem;">
-            <div class="card-header bg-dark text-white">Edit Post</div>
-            <div class="card-body">
-
-                <input type="hidden" name="post-id" value="{{post.id}}" />
-
-                <div class="form-group col-auto">
-                    <label class="form-label" for="post-title">Title</label>
-                    <input type="text" name="post-title" value="{{post.title}}" class="form-control" />
-                </div>
 
 
-                <div class="form-group col-auto">
-                    <label class="form-label" for="post-body">Description</label>
-                    <textarea name="post-body" class="form-control">{{post.body}}</textarea>
-                </div>
+    <div class="list-group">
+        {{#each posts}}
+        <a href="/dashboard/edit/{{id}}" class="list-group-item list-group-item-action">
+            <span>sdafdfds</span>
+            <span>sadfvbjhsdjsa</span>
+        </a>
+        {{/each}}
+    </div>
 
 
-                <div class="form-group col-auto">
-                    <label for="exampleFormControlFile1">Upload Picture</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </div>
+    <div class="list-group col-md-9 mx-auto">
+        {{#each posts}}
+        <a href="/dashboard/edit/{{id}}" class="list-group-item my-1">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{title}}</h5>
+                <small>{{format_date createdAt}}</small>
+            </div>            
+        </a>
+        {{/each}}
+    </div>
 
 
-                <button type="submit" class="btn btn-block btn-dark">UPDATE</button>
-                <button type="submit" class="btn btn-block btn-dark" id="delete-btn">DELETE</button>
 
-
-            </div>
-        </div>
-    </form>
 
     <script src="/javascript/edit.js"></script>
 
