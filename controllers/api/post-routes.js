@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const { Post, User } = require('../../models');
 const sequelize = require('../../config/connection');
+const withAuth = require('../../utils/auth')
 
-app.use(fileUpload({
+router.use(fileUpload({
     limits: { fileSize: 250 * 250 * 250 },
   }));
 
@@ -14,7 +15,8 @@ router.get('/', (req, res) => {
             'id',
             'post_text',
             'title',
-            'created_at'
+            'created_at',
+            'image'
         ],
         include:[
             {
@@ -39,7 +41,8 @@ router.get('/:id', (req, res) => {
             'id',
             'post_text',
             'title',
-            'created_at'
+            'created_at',
+            'image'
         ],
         include: [
             {
@@ -60,7 +63,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Post.create({
         title: req.body.title,
         post_text: req.body.post_text,
@@ -74,7 +77,7 @@ router.post('/', (req, res) => {
         });
 });
 
-app.post('/upload', function(req, res) {
+router.post('/upload', function(req, res) {
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).send('No files were uploaded.');
     }
@@ -91,11 +94,12 @@ app.post('/upload', function(req, res) {
     });
   });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Post.update(
         {
             title: req.body.title,
-            post_text: req.body.post_text
+            post_text: req.body.post_text,
+            image: req.body.image
         },
         {
             where: {
@@ -116,7 +120,7 @@ router.put('/:id', (req, res) => {
         });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Post.destroy({
         where: {
             id: req.params.id

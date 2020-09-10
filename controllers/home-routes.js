@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const sequelize = require('../config/connection')
 const { Post, User } = require('../models');
 
 router.get('/', (req, res) => {
@@ -20,7 +21,9 @@ router.get('/', (req, res) => {
     .then(dbPostData => {
       
       const posts = dbPostData.map(post => post.get({ plain: true }));
-      res.render('homepage', { posts });
+      res.render('homepage', { 
+        posts, 
+        loggedIn: req.session.loggedIn });
     })
     .catch(err => {
       console.log(err);
@@ -28,28 +31,23 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/login', (req, res) => {
-  User.findOne({
-    where: {
-      email: req.body.email
-    }
-  }).then(dbUserData => {
-    if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that email address!' });
-      return;
-    }
 
-    const validPassword = dbUserData.checkPassword(req.body.password);
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
 
-    if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect password!' });
-      return;
-    }
-
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
-    
-  });
+  res.render('login');
 });
+
+router.get('/signup', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+  }
+  res.render('signup');
+});
+
 
 router.get('/post/:id', (req, res) => {
   Post.findOne({
@@ -78,7 +76,10 @@ router.get('/post/:id', (req, res) => {
 
       const post = dbPostData.get({ plain: true });
 
-      res.render('single-post', { post });
+      res.render('single-post', { 
+        post,
+        loggedIn: req.session.loggedIn
+      });
     })
     .catch(err => {
       console.log(err);

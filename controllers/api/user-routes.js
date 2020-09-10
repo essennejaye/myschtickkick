@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
                     'id',
                     'title',
                     'post_text',
-                    'created_at'
+                    'created_at',
+                    'image'
                 ]
             }
         ]
@@ -36,7 +37,8 @@ router.get('/:id', (req, res) => {
                     'id',
                     'title',
                     'post_text',
-                    'created_at'
+                    'created_at',
+                    'image'
                 ]
             }
         ]
@@ -61,8 +63,15 @@ router.post('/', (req, res) => {
       password: req.body.password
     })
     .then(dbUserData => {
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+        req.session.cookie.maxAge = 3600000;
+
       res.json(dbUserData)
-    })
+    });
+  })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -72,7 +81,7 @@ router.post('/', (req, res) => {
 router.post('/login', (req, res) => {
     User.findOne({
       where: {
-        email: req.body.email
+        username: req.body.username
       }
     }).then(dbUserData => {
       if (!dbUserData) {
@@ -85,9 +94,27 @@ router.post('/login', (req, res) => {
         res.status(400).json({ message: 'Incorrect password!' });
         return;
       }
+
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+        req.session.cookie.maxAge = 3600000;
       res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
   });
+});
+
+router.post('/logout', (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
+  else {
+    res.status(404).end();
+  }
+});
 
   router.put('/:id', (req, res) => {
     User.update(req.body, {
@@ -127,5 +154,8 @@ router.post('/login', (req, res) => {
         res.status(500).json(err);
       });
   });
+
+
+
 
 module.exports = router;
