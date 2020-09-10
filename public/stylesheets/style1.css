@@ -1,0 +1,79 @@
+/* .btn {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-decoration:none;
+  width: fit-content;
+  display: flex;
+  margin: 5px 10px;
+  border-radius: var(--border-radius);
+  color: var(--primary);
+  border: none;
+  outline: none;
+  background-color: var(--dark);
+  box-shadow: 3px 3px var(--secondary);
+  transform: translate(-1px, -1px);
+}
+
+.btn:hover {
+  color: var(--secondary);
+  background-color: var(--dark);
+  transform: translate(0, 0);
+  box-shadow: 2px 2px var(--dark);
+}
+.btn a {
+  text-decoration: none;
+  color: var(--primary);
+  margin: 2px;
+}
+.delete-post-btn {
+  background-color: #d41414;
+}
+
+.delete-post-btn:hover {
+  background-color: #ff643d;
+}
+
+.new-post-form input {
+  width: 300px;
+}
+.edit-post-form {
+  margin-bottom: 5%;
+}
+
+.comment:nth-child(odd) {
+  background-color: var(--primary);
+  color: var(--dark);
+}
+
+textarea, input {
+  padding: .5%;
+  border-radius: 5px;
+  border: 1px solid var(--light-dark);
+}
+
+textarea:focus, input:focus {
+  outline: none;
+  border: 1px solid #3486eb;
+}
+
+textarea {
+  min-width: 40%;
+  min-height: 100px;
+} */
+.dashboard-title {
+  font-size: 2rem;
+  background-color: var(--primary);
+  color: var(--dark);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+  border-radius: var(--border-radius);
+}
+.edit-link {
+  display: flex;
+  justify-content: flex-end;
+}
+
+form label {
+  display: block;
+}

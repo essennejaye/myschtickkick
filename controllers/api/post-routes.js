@@ -19,7 +19,10 @@ router.get('/', (req, res) => {
             }
         ]
     })
-    .then(dbPostData => res.json(dbPostData))
+    .then(dbPostData => {
+        console.log(dbPostData);
+        res.json(dbPostData)
+    })
     .catch(err => {
         console.log(err);
         res.status(500).json(err);

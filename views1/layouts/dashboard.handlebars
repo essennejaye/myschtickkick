@@ -25,13 +25,15 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-                <a class="nav-link" href="/">Home</a>
-
-                <a class="nav-link" href="/dashboard">Dashboard</a>
-
-                <a class="nav-link" href="#" id="logout-link">Logout</a>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="logout-link">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -48,31 +50,27 @@
 
 
 
-    <div class="list-group">
-        {{#each posts}}
-        <a href="/dashboard/edit/{{id}}" class="list-group-item list-group-item-action">
-            <span>sdafdfds</span>
-            <span>sadfvbjhsdjsa</span>
-        </a>
-        {{/each}}
-    </div>
+
+    <main class="col-auto">
+        {{{body}}}
+    </main>
 
 
-    <div class="list-group col-md-9 mx-auto">
-        {{#each posts}}
-        <a href="/dashboard/edit/{{id}}" class="list-group-item my-1">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{title}}</h5>
-                <small>{{format_date createdAt}}</small>
-            </div>            
-        </a>
-        {{/each}}
+    <div class="col-auto nav justify-content-center">
+        <button type="button" class="btn btn-dark btn-md"><a href="/dashboard/new"><i class="far fa-plus-square"></i>New Post</a>
+            </button>
     </div>
 
 
 
 
-    <script src="/javascript/edit.js"></script>
+    <footer class="text-center">
+        &copy; Satalia, Heather, & Luis
+    </footer>
+
+
+
+    <script src="/javascript/logout.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
