@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection')
 const { Post, User } = require('../models');
 
 router.get('/', (req, res) => {
@@ -9,21 +8,18 @@ router.get('/', (req, res) => {
       'post_text',
       'title',
       'created_at',
-      'image'
+      'post_image'
     ],
     include: [
       {
         model: User,
-        attributes: ['username']
+        attributes: ['username', 'email']
       }
     ]
   })
     .then(dbPostData => {
-      
       const posts = dbPostData.map(post => post.get({ plain: true }));
-      res.render('homepage', { 
-        posts, 
-        loggedIn: req.session.loggedIn });
+      res.render('all-posts', { posts });
     })
     .catch(err => {
       console.log(err);
@@ -31,23 +27,39 @@ router.get('/', (req, res) => {
     });
 });
 
-
 router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-
-  res.render('login');
+    if (req.session.loggedIn) {
+      res.redirect('/');
+      return;
+    }
+    res.render('login');
+  });
+  
+  router.get('/signup', (req, res) => {
+    if (req.session.loggedIn) {
+      res.redirect('/');
+    }
+    res.render('signup');
+  });
+  
+router.post('/login', (req, res) => {
+  User.findOne({
+    where: {
+      username: req.body.username
+    }
+  }).then(dbUserData => {
+    if (!dbUserData) {
+      res.status(400).json({ message: 'No user with that email address!' });
+      return;
+    }
+    const validPassword = dbUserData.checkPassword(req.body.password);
+    if (!validPassword) {
+      res.status(400).json({ message: 'Incorrect password!' });
+      return;
+    }
+      res.json({ user: dbUserData, message: 'You are now logged in!' });
+  });
 });
-
-router.get('/signup', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-  }
-  res.render('signup');
-});
-
 
 router.get('/post/:id', (req, res) => {
   Post.findOne({
@@ -59,7 +71,7 @@ router.get('/post/:id', (req, res) => {
       'post_text',
       'title',
       'created_at',
-      'image'
+    //   'image'
     ],
     include: [
       {
@@ -73,13 +85,8 @@ router.get('/post/:id', (req, res) => {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-
       const post = dbPostData.get({ plain: true });
-
-      res.render('single-post', { 
-        post,
-        loggedIn: req.session.loggedIn
-      });
+      res.render('single-post', { post });
     })
     .catch(err => {
       console.log(err);
