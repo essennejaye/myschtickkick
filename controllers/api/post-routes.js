@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
             'id',
             'post_text',
             'title',
-            'post_image',
+            'image',
             'created_at'
         ],
         include: [
@@ -43,8 +43,8 @@ router.get('/:id', (req, res) => {
             'id',
             'post_text',
             'title',
-            'post_image',
-            'created_at'
+            'image',
+            'created_at',
         ],
         include: [
             {
@@ -55,7 +55,7 @@ router.get('/:id', (req, res) => {
     })
         .then(dbPostData => {
             if (!dbPostData) {
-                res.status(404).json({ message: 'Mo post found with this id' });
+                res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
             res.json(dbPostData);
@@ -83,23 +83,23 @@ router.post('/', (req, res) => {
         title: req.body.title,
         user_id: req.body.user_id,
         post_text: req.body.post_text,
-        post_image: req.body.post_image,
+        image: req.body.image,
     })
         .then(dbPostData => {
-            if (!dbPostData.post_image) {
-                return res.status(400).send('No files uploaded');
-            }
-            let file = dbPostData.post_image;
-            let img_name = file.name;
-            if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/gif") {
-                file.mv('public/images/uploads/' + file.name, function (err) {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-                })
-            } else {
-                console.log("This format is not allowed , please upload file with '.png','.gif','.jpg'");
-            }
+            // if (!dbPostData.image) {
+            //     return res.status(400).send('No files uploaded');
+            // }
+            // let file = dbPostData.image;
+            // let img_name = file.name;
+            // if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/gif") {
+            //     file.mv('public/images/uploads/' + file.name, function (err) {
+            //         if (err) {
+            //             return res.status(500).send(err);
+            //         }
+            //     })
+            // } else {
+            //     console.log("This format is not allowed , please upload file with '.png','.gif','.jpg'");
+            // }
             res.json(dbPostData)
         })
         .catch(err => {

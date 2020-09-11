@@ -83,6 +83,13 @@ main {
   box-shadow: 3px 3px var(--secondary);
   transform: translate(-1px, -1px);
 }
+button.btn {
+  background-color: var(--secondary);
+}
+button.btn:hover {
+  color: var(--secondary);
+  background-color: var(--primary);
+}
 
 .btn:hover {
   color: var(--secondary);
@@ -135,6 +142,8 @@ img {
 
 .post-title {
   margin-top: 5px;
+  font-size: 2em;
+  font-weight: bolder;
 }
 
 .media-body a {
@@ -164,6 +173,20 @@ img {
 
 a.signup {
   padding: 2px 10px;
+}
+textarea, input {
+  padding: .5%;
+  border-radius: 5px;
+  border: 1px solid var(--light-dark);
+}
+textarea:focus, input:focus {
+  outline: none;
+  border: 1px solid #3486eb;
+}
+
+textarea {
+  min-width: 40%;
+  min-height: 100px;
 }
 
 .col-auto p {

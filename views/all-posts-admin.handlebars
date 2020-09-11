@@ -1,10 +1,16 @@
-<div class="list-group col-md-9 mx-auto">
-    {{#each posts}}
-    <a href="/dashboard/edit/{{id}}" class="list-group-item my-1">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{title}}</h5>
-            <small>{{format_date createdAt}}</small>
-        </div>
-    </a>
-    {{/each}}
+{{!-- <div class="list-group col-md-9 mx-auto"> --}}
+<div>
+    <ul class="list-unstyled">
+        {{#each posts}}
+        <li class="media">
+            <img src="../../images/henna-hobby.jpg" class="align-self-center" alt="...">
+            <div class="media-body">
+                <h4 class="post-title">{{title}}</h4>
+                <p>{{post_text}}</p>
+                <small>{{format_date created_at}}</small>
+                <a href="/dashboard/edit/{{id}}">Edit Post</a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
 </div>
