@@ -1,31 +1,28 @@
-const signupFormHandler = async function(event) {
+async function signupFormHandler(event) {
     event.preventDefault();
 
-    const usernameSignup = document.querySelector("#username-input-signup");
-    const passwordSignup = document.querySelector("#password-input-signup");
+    const username = document.querySelector("#username-input-signup").value.trim();
+    const password = document.querySelector("#password-input-signup").value.trim();
+    const email = document.querySelector("#email-input-signup").value.trim();
 
-    fetch("/api/user", {
-        method: "post",
-        body: JSON.stringify({
-            username: usernameSignup.value,
-            password: passwordSignup.value
-        }), 
-        headers
-    })
+    if (username && email && password) {
+        const response = await fetch("/api/user", {
+            method: "post",
+            body: JSON.stringify({
+                username,
+                password,
+                email
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (response.ok) {
+            document.location.replace('/dashboard/');
+        } else {
+            alert(response.statusText);
+        }
+    }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-document.querySelector("#signup-form");
-document.addEventListener("submit", signupFormHandler);
+document.querySelector("#signup-form").addEventListener("submit", signupFormHandler);
