@@ -1,8 +1,8 @@
 <div class="list-group col-md-9 mx-auto">
     {{#each posts}}
-    <a href="/dashboard/edit/{{id}}" class="list-group-item my-1">
+    <a href="/dashboard/edit/{{post.id}}" class="list-group-item my-1">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{title}}</h5>
+            <h5 class="mb-1">{{post.title}}</h5>
             <small>{{format_date createdAt}}</small>
         </div>
     </a>
