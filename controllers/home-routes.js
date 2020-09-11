@@ -8,12 +8,12 @@ router.get('/', (req, res) => {
       'post_text',
       'title',
       'created_at',
-    //   'image'
+      'post_image'
     ],
     include: [
       {
         model: User,
-        attributes: ['username']
+        attributes: ['username', 'email']
       }
     ]
   })
@@ -45,7 +45,7 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
   User.findOne({
     where: {
-      email: req.body.email
+      username: req.body.username
     }
   }).then(dbUserData => {
     if (!dbUserData) {

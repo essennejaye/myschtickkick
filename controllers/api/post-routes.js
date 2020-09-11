@@ -3,30 +3,30 @@ const { Post, User } = require('../../models');
 const sequelize = require('../../config/connection');
 
 router.get('/', (req, res) => {
-    console.log('===========');
     Post.findAll({
         order: [['created_at', 'DESC']],
         attributes: [
             'id',
             'post_text',
             'title',
+            'post_image',
             'created_at'
         ],
-        include:[
+        include: [
             {
                 model: User,
-                attributes: ['username']
+                attributes: ['username', 'email']
             }
         ]
     })
-    .then(dbPostData => {
-        console.log(dbPostData);
-        res.json(dbPostData)
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+        .then(dbPostData => {
+            console.log(dbPostData);
+            res.json(dbPostData)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 router.get('/:id', (req, res) => {
@@ -38,34 +38,65 @@ router.get('/:id', (req, res) => {
             'id',
             'post_text',
             'title',
+            'post_image',
             'created_at'
         ],
         include: [
             {
-                model: User, 
-                attributes: ['username']
+                model: User,
+                attributes: ['username', 'email']
             }
         ]
     })
-    .then(dbPostData => {
-        if (!dbPostData) {
-            res.status(404).json({ message: 'Mo post found with this id' });
-            return;
-        }
-        res.json(dbPostData);
-    }).catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+        .then(dbPostData => {
+            if (!dbPostData) {
+                res.status(404).json({ message: 'Mo post found with this id' });
+                return;
+            }
+            res.json(dbPostData);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
+// router.post('/', (req, res) => {
+//     Post.create({
+//         title: req.body.title,
+//         post_text: req.body.post_text,
+//         user_id: req.body.user_id
+//     })
+//         .then(dbPostData => res.json(dbPostData))
+//         .catch(err => {
+//             console.log(err);
+//             res.status(500).json(err);
+//         });
+// });
 router.post('/', (req, res) => {
+    console.log(req.body);
     Post.create({
         title: req.body.title,
+        user_id: req.body.user_id,
         post_text: req.body.post_text,
-        user_id: req.body.user_id
+        post_image: req.body.post_image,
     })
-        .then(dbPostData => res.json(dbPostData))
+        .then(dbPostData => {
+            if (!dbPostData.post_image) {
+                return res.status(400).send('No files uploaded');
+            }
+            let file = dbPostData.post_image;
+            let img_name = file.name;
+            if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/gif") {
+                file.mv('public/images/uploads/' + file.name, function (err) {
+                    if (err) {
+                        return res.status(500).send(err);
+                    }
+                })
+            } else {
+                console.log("This format is not allowed , please upload file with '.png','.gif','.jpg'");
+            }
+            res.json(dbPostData)
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
