@@ -1,27 +1,27 @@
-    <form class="mx-auto col-auto" style="width: 500px;">
-        <div class="card text-white bg-danger mb-9" style="max-width: 50rem;">
-            <div class="card-header bg-dark">Sign Up</div>
-            <div class="card-body" id="signup-form">
+<form class="mx-auto col-auto signup">
+    <div class="card mb-9">
+        <div class="card-header">Sign Up</div>
+        <div class="card-body">
 
-                <div class="form-group col-auto">
-                    <label for="username-input-signup">Username:</label>
-                    <input type="text" class="form-control col-md-12" id="username-input-signup">
-                </div>
-                
-                <div class="form-group col-auto">
-                    <label for="password-input-signup">Password:</label>
-                    <input type="password" class="form-control col-md-12" id="password-input-signup">
-                </div>
-
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-dark btn-block" id="signup-btn">Sign Up!</button>
-                </div>
+            <div class="form-group col-auto">
+                <label for="username-input-signup">Please Enter a Username:</label>
+                <input type="text" class="form-control col-md-12" id="username-input-signup">
             </div>
-            
+
+            <div class="form-group col-auto">
+                <label for="password-input-signup">Please Enter a Password of at Least 4 characters:</label>
+                <input type="password" class="form-control col-md-12" id="password-input-signup">
+            </div>
+            <div class="form-group col-auto">
+                <label for="email-input-signup">Please Enter Your Email:</label>
+                <input type="email" class="form-control col-md-12" id="email-input-signup">
+            </div>
+
             <div class="col-auto">
-                <a type="button" href="/login" class="text-white">Login</a>
+                <button type="submit" class="btn btn-dark btn-block" id="signup-btn">Sign Up!</button>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 
-    <script src="/javascript/signup.js"></script>
+<script src="/javascript/signup.js"></script>

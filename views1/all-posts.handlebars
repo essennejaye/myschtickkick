@@ -1,0 +1,18 @@
+<!--CARDS FOR POST-->
+<div class="row row-cols-1 row-cols-md-4 col-auto">
+
+    {{#each posts}}
+    <div class="col mb-4">
+        <div class="card">
+            <img src="{{image}}" class="card-img-top" alt="..." style="width:auto;height:200px">
+            <div class="card-body bg-dark text-white">
+                <h4 class="card-title">{{title}}</h4>
+                <p class="card-text overflow-auto" style="height: 150px">{{body}}!</p>
+                <small>Posted by {{User.username}} on {{format_date createdAt}}</small><br>
+                <a href="#">Click Here For More Info!</a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+
+</div>
