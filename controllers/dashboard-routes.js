@@ -23,7 +23,6 @@ router.get('/', withAuth, (req, res) => {
       ]
     })
       .then(dbPostData => {
-        
         const posts = dbPostData.map(post => post.get({ plain: true }));
         res.render('all-posts-admin', { 
           layout: 'dashboard',
@@ -34,6 +33,12 @@ router.get('/', withAuth, (req, res) => {
         res.status(500).json(err);
       });
   });
+  router.get("/new", withAuth, (req, res) => {
+    res.render("new-post", {
+      layout: "dashboard"
+    });
+  });
+
 
   router.get('/edit/:id', withAuth, (req, res) => {
     Post.findOne({
@@ -58,6 +63,7 @@ router.get('/', withAuth, (req, res) => {
         .then(dbPostData => {
             const posts = dbPostData.get({ plain: true });
             res.render('edit-post', {
+              layout: 'dashboard',
                 posts,
                 loggedIn: true
             });
