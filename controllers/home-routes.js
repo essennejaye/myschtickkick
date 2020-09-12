@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
       'post_text',
       'title',
       'created_at',
-      'post_image'
+      'image'
     ],
     include: [
       {
@@ -71,7 +71,7 @@ router.get('/post/:id', (req, res) => {
       'post_text',
       'title',
       'created_at',
-    //   'image'
+      'image'
     ],
     include: [
       {

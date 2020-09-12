@@ -1,8 +1,8 @@
 <!--EDIT POST-->
 
-<form id="new-post-form" class="mx-auto col-auto" style="width: 700px;">
-    <div class="card text-dark  mb-9" style="max-width: 50rem;">
-        <div class="card-header bg-dark text-white">Edit Post</div>
+<form id="new-post-form" class="mx-auto col-auto" >
+    <div class="card  mb-9">
+        <div class="card-header ">Edit Post</div>
         <div class="card-body">
 
             <input type="hidden" name="post-id" value="{{post.id}}" />
@@ -15,7 +15,7 @@
 
             <div class="form-group col-auto">
                 <label class="form-label" for="post-body">Description</label>
-                <textarea name="post-body" class="form-control">{{post.body}}</textarea>
+                <textarea name="post-body" class="form-control">{{post.post_text}}</textarea>
             </div>
 
 
@@ -25,8 +25,8 @@
             </div>
 
 
-            <button type="submit" class="btn btn-block btn-dark">UPDATE</button>
-            <button type="submit" class="btn btn-block btn-dark" id="delete-btn">DELETE</button>
+            <button type="submit" class="btn btn-block" id="update-btn">UPDATE</button>
+            <button type="submit" class="btn btn-block" id="delete-btn">DELETE</button>
 
 
         </div>
