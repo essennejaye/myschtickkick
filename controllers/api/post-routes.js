@@ -65,23 +65,11 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// router.post('/', (req, res) => {
-//     Post.create({
-//         title: req.body.title,
-//         post_text: req.body.post_text,
-//         user_id: req.body.user_id
-//     })
-//         .then(dbPostData => res.json(dbPostData))
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json(err);
-//         });
-// });
 router.post('/', (req, res) => {
     console.log(req.body);
     Post.create({
         title: req.body.title,
-        user_id: req.body.user_id,
+        user_id: req.session.user_id,
         post_text: req.body.post_text,
         image: req.body.image,
     })

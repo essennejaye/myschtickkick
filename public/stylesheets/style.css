@@ -1,5 +1,6 @@
 :root {
   --primary: white;
+  /* ba3950 */
   --secondary: rgb(186, 57, 80);
   --dark: #253140;
   --tertiary: rgb(173, 24, 52);
@@ -39,8 +40,9 @@ a:hover {
   position: relative;
   background-color: rgba(195,82,102,.9);
   background-image: url("Q2yuHPuph8.svg");
-  background-size: contain;
+  background-size: 34%;
   background-repeat: repeat;
+  background-position: top;
 }
 .container {
   text-align: center;
@@ -147,7 +149,8 @@ img {
   width: 500px;
   margin-top: 100px;
 }
-#new-post-form {
+#new-post-form,
+#edit-post-form {
   width: 700px;
 }
 
