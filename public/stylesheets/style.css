@@ -18,10 +18,13 @@ body {
   font-family: "Roboto", sans-serif;
   color: var(--primary);
 }
+
 /* navigation bar */
+
 .navbar {
   background-color: var(--dark);
 }
+
 a {
   text-decoration: none;
   font-weight: bold;
@@ -31,33 +34,41 @@ a {
 a:hover {
   color: var(--secondary);
 }
+
 .white-nav-link {
   color: var(--primary) !important;
 }
 
 /* hero */
+
 .jumbotron {
   position: relative;
-  background-color: rgba(195,82,102,.9);
+  background-color: rgba(195, 82, 102, .9);
   background-image: url("Q2yuHPuph8.svg");
   background-size: 34%;
   background-repeat: repeat;
   background-position: top;
 }
+
 .container {
   text-align: center;
 }
+
 /* hero title */
+
 .app-title {
   font-size: 4.5rem;
   font-weight: bold;
   font-family: "Leckerli One", cursive;
 }
+
 .app-subtitle {
   font-size: large;
   font-family: "Leckerli One", cursive;
 }
+
 /* content area */
+
 main {
   width: 100%;
   min-height: 100%;
@@ -78,6 +89,7 @@ main {
   background-color: var(--dark);
   margin: auto;
 }
+
 .btn:hover {
   color: var(--dark);
   background-color: var(--primary);
@@ -90,23 +102,22 @@ main {
   color: var(--dark);
   margin: 10px;
 }
+
 #new-post-btn:hover {
   color: var(--secondary);
   background-color: var(--dark);
   text-decoration: none;
 }
+
 #delete-btn {
   color: var(--tertiary);
   background-color: var(--primary);
   margin-top: 20px;
 }
+
 #delete-btn:hover {
   color: var(--primary);
   background-color: var(--tertiary);
-}
-
-form>div {
-  margin-bottom: 2%;
 }
 
 .media {
@@ -137,21 +148,24 @@ img {
   margin: 10px 15px 0px 0px;
   padding: 10px;
 }
+
 .media-body a:hover {
   text-decoration: none;
   color: var(--secondary);
 }
 
-.login,
-.signup,
-#new-post-form
- {
+/* forms styling */
+.login, .signup, #new-post-form, #edit-post-form {
   width: 500px;
   margin-top: 100px;
 }
-#new-post-form,
-#edit-post-form {
+
+#new-post-form, #edit-post-form {
   width: 700px;
+}
+
+form>div {
+  margin-bottom: 2%;
 }
 
 .card-header {
@@ -170,6 +184,7 @@ img {
 a.signup {
   padding: 2px 10px;
 }
+
 textarea, input {
   padding: .5%;
   border-radius: 5px;
@@ -185,11 +200,13 @@ textarea {
   margin-top: .5rem;
   text-align: center;
 }
+
 footer {
   text-align: center;
   color: var(--primary);
   font-weight: bold;
 }
+
 @media (min-width: 576px) {
   .jumbotron {
     padding: 3rem 2rem;
@@ -202,26 +219,29 @@ footer {
     border: 2px solid #444;
     padding: 10px;
   }
-  .media > .title { grid-area: title; }
-  .media > .img { grid-area: img; }
-  .media > .content { grid-area: bd; }
-  .media > .footer { grid-area: ft; }
-
+  .media>.title {
+    grid-area: title;
+  }
+  .media>.img {
+    grid-area: img;
+  }
+  .media>.content {
+    grid-area: bd;
+  }
+  .media>.footer {
+    grid-area: ft;
+  }
   .media {
     display: grid;
     grid-column-gap: 20px;
-    grid-template-areas:
-      "title"
-      "img"
-      "bd"
-      "ft";
+    grid-template-areas: "title" "img" "bd" "ft";
   }
   .media:after {
     content: "";
     display: block;
     clear: both;
   }
-  .media > .media {
+  .media>.media {
     margin-left: 160px;
     clear: both;
   }

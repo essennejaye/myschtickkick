@@ -3,7 +3,8 @@
     <ul class="list-unstyled">
         {{#each posts}}
         <li class="media">
-            <img src="../../images/henna-hobby.jpg" class="align-self-center" alt="...">
+            <img src={{image}} class="align-self-center" alt="...">
+            {{!-- <img src="../../images/henna-hobby.jpg" class="align-self-center" alt="..."> --}}
             <div class="media-body">
                 <h4 class="post-title">{{title}}</h4>
                 <p>{{post_text}}</p>
@@ -13,4 +14,13 @@
         </li>
         {{/each}}
     </ul>
+
+    <div class="col-auto nav justify-content-center">
+        <button type="button" class="btn" id="new-post-btn">
+            <a href="/dashboard/new"><i class="far fa-plus-square"></i>
+                Add New Post
+            </a>
+        </button>
+    </div>
+
 </div>

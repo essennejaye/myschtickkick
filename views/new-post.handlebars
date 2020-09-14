@@ -1,6 +1,7 @@
 <!--Create Post-->
 
-<form id="new-post-form" class="mx-auto col-auto">
+<form id="new-post-form" class="mx-auto col-auto" action="../public/javascript/new.js" method="POST"
+    enctype="multipart/form-data">
     <div class="card  mb-9">
         <div class="card-header ">Create New Post</div>
         <div class="card-body">
@@ -16,7 +17,8 @@
 
             <div class="form-group col-auto">
                 <label for="post-image">Upload Picture</label>
-                <input type="file" class="form-control-file">
+                <input type="file" name="post-image" id="post-image" accept="/" class="form-control-file upload"
+                accept="image/png, image/jpeg, image/jpg, image/gif">
             </div>
 
             <div class="card-footer">
