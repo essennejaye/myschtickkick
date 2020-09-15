@@ -48,10 +48,10 @@ https://drive.google.com/file/d/1HwVtEBzoMZkkHpSpSw6qwhQORwzKH4ya/view?usp=shari
 
 ### Screenshots
 
-![]public/images/pro_2_home.png 
-![]public/images/pro_2_dashboard.png 
-![]public/images/pro_2_login.png 
-![]public/images/pro_2_add_new.png
+![](public/images/pro_2_home.png) 
+![](public/images/pro_2_dashboard.png) 
+![](public/images/pro_2_login.png) 
+![](public/images/pro_2_add_new.png)
 
 ### Heroku link
 
