@@ -1,0 +1,16 @@
+<!--CARDS FOR POST-->
+<div>
+    <ul class="list-unstyled">
+        {{#each posts}}
+        <li class="media">
+            <img src={{image}} class="align-self-center" alt="...">
+            <div class="media-body">
+                <h4 class="post-title">{{title}}</h4>
+                <p>{{post_text}}</p>
+                <small>Posted by {{user.username}} on {{format_date created_at}}</small><br>
+                <a href="mailto:{{user.email}}" target="__blank">Contact Me For More Info!</a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>

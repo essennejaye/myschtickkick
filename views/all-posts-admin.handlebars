@@ -1,0 +1,25 @@
+<div>
+    <ul class="list-unstyled">
+        {{#each posts}}
+        <li class="media">
+            <img src={{image}} class="align-self-center" alt="...">
+            <div class="media-body">
+                <h4 class="post-title">{{title}}</h4>
+                <p>{{post_text}}</p>
+                <small>{{format_date created_at}}</small>
+                <a href="/dashboard/edit/{{id}}">Edit Post</a>
+                
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+    <div class="col-auto nav justify-content-center">
+        <button type="button" class="btn" id="new-post-btn">
+            <a href="/dashboard/new"><i class="far fa-plus-square"></i>
+                Add New Post
+            </a>
+        </button>
+    </div>
+
+</div>
