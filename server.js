@@ -16,7 +16,7 @@ let sess = {
     saveUninitialized: true,
     store: new SequelizeStore({
       db: sequelize
-    })
+    }),
   };
   
 const routes = require('./controllers');
@@ -32,6 +32,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); // path to static css and js files
 app.use(fileUpload({
+  limits: { fileSize: 2 * 1024 * 1024 },
+  createParentPath: true
 }));
 // turn on routes
 app.use(routes);

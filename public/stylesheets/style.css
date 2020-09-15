@@ -97,9 +97,8 @@ main {
   box-shadow: 2px 2px var(--dark);
 }
 
-#new-post-btn {
-  background-color: var(--secondary);
-  color: var(--dark);
+#new-post-btn  {
+  background-color: rgba(186,57, 80, .6);
   margin: 10px;
 }
 

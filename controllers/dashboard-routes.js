@@ -51,7 +51,6 @@ router.get('/edit/:id', withAuth, (req, res) => {
       'title',
       'post_text',
       'created_at',
-      'image'
     ],
     include: [
       {
@@ -65,7 +64,6 @@ router.get('/edit/:id', withAuth, (req, res) => {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      console.log(dbPostData);
       const posts = dbPostData.get({ plain: true });
       res.render('edit-post', {
         layout: 'dashboard',
