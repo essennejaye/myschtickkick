@@ -213,6 +213,9 @@ footer {
 }
 
 @media screen and (max-width: 600px) {
+  .app-title {
+    font-size: 4.0rem;
+  }
   .media {
     margin-bottom: 2em;
     border: 2px solid #444;

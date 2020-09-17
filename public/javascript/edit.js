@@ -1,9 +1,6 @@
 async function editFormHandler(event) {
     event.preventDefault();
 
-    // const title = document.querySelector('input[name="post-title"]').value;
-    // const body = document.querySelector('textarea[name="post-body"]').value;
-
     const title = document.querySelector('input[name="post-title"]').value.trim();
     const post_text = document.querySelector('textarea[name="post-body"]').value.trim();
 
@@ -12,7 +9,6 @@ async function editFormHandler(event) {
     ];
     console.log('the edit post id is ', id);
     if (title && post_text) {
-        console.log('the post name and text are ', title, post_text, id);
         const response = await fetch(`/api/posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify({
@@ -41,7 +37,7 @@ async function deleteClickHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/dashboard/');
+        document.location.replace('/dashboard');
     } else {
         alert(response.statusText)
     }
