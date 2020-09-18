@@ -3,6 +3,7 @@ const { Post, User } = require('../models');
 
 router.get('/', (req, res) => {
   Post.findAll({
+    order: [['created_at', 'DESC']],
     attributes: [
       'id',
       'post_text',

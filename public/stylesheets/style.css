@@ -100,6 +100,9 @@ main {
 #new-post-btn  {
   background-color: rgba(186,57, 80, .6);
   margin: 10px;
+  position: fixed;
+  right: 0px;
+  bottom: 50px;
 }
 
 #new-post-btn:hover {

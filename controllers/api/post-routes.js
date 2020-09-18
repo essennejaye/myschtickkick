@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Post, User } = require('../../models');
 const withAuth = require('../../utils/auth')
-const path = require('path');
 
 router.get('/', (req, res) => {
     Post.findAll({
@@ -28,7 +27,7 @@ router.get('/', (req, res) => {
             res.status(500).json(err);
         });
 });
-
+// currently non user find one not implemented
 router.get('/:id', (req, res) => {
     Post.findOne({
         where: {
@@ -60,56 +59,41 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// add array of mimetypes for cleaner checking
-// add string of supported file extensions used in error feedback
-const MimeTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
-const SupportedImageExts = "'.png','.gif','.jpg','.jpeg'";
 const PlaceholderImageRelUrl = "images/assets/msk_no_image.jpg";
+// add array of mimetypes for cleaner checking
+const MimeTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
+// add var for startsWith to avoid hardcoding inside of function
+const MimeHeaderSkip = "data:".length;
 
-function getLocalImagesFolder() {
-    var localPath = path.join(__dirname, "..", "..", "public", "images");
-    return localPath;
+function getMimeTypeIndex(dataurl) {
+    //TODO - this is case sensitive, but we don't want to call toLower on dataurl
+    for (var i = 0; i < MimeTypes.length; ++i) {
+        var mime = MimeTypes[i];
+        // check for mime type
+        if (dataurl.startsWith(mime, MimeHeaderSkip))
+            return i;
+    }
+    return -1;
 }
 
 router.post('/', withAuth, (req, res) => {
-    // console.log(req.body, req.files);
-    var imageUrl = req.files ? 'images/uploads/' + req.files.image.name : PlaceholderImageRelUrl;
-    var usePlaceholder = !req.files;
+    var url = req.body.image;
+    if (!url) {
+        url = PlaceholderImageRelUrl;
+    }
+    else {
+        if (getMimeTypeIndex(url) === -1) {
+            return res.status(500).send({ message: `Cannot upload unsupported type`});
+        }
+    }
     Post.create({
         title: req.body.title,
         user_id: req.session.user_id,
         post_text: req.body.post_text,
-        image: imageUrl
+        // write image file  directly to database to avoid non persistent storage on Heroku
+        image: url
     })
         .then(dbPostData => {
-            if (!dbPostData.image) {
-                console.log('dbPostData failed 400: No files upload');
-                return res.status(400).send('No files uploaded');
-            }
-            // if we reach here and are using the placeholder image,
-            // there's no need to move anuthing, so return now.
-            if (usePlaceholder) {
-                return res.json(dbPostData);
-            }
-            // save mimetype into a local var for tests below
-            let mimetype = req.files.image.mimetype;
-            let mimeIndex = MimeTypes.indexOf(mimetype);
-            // check for supported mime types
-            if (mimeIndex !== -1) {
-                let localPath = path.join(getLocalImagesFolder(), 'uploads', req.files.image.name);
-                // console.log(`Image format OK, copying to ${localPath}`);
-                req.files.image.mv(localPath, function (err) {
-                    if (err) {
-                        console.log(`Error ${err}`);
-                        return res.status(500).send(err);
-                    } //else {
-                    //     console.log("Unknown error, file move must have failed");
-                    // } 
-                })
-            } else {
-                console.log(`Format '${mimetype}' is not allowed, please upload file with ${SupportedImageExts}`);
-            }
-            // console.log("Done moving image");
             res.json(dbPostData)
         })
         .catch(err => {
@@ -123,6 +107,7 @@ router.put('/:id', withAuth, (req, res) => {
         {
             title: req.body.title,
             post_text: req.body.post_text,
+            // image currently not being edited
             image: req.body.image
         },
         {
