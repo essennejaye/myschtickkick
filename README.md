@@ -59,4 +59,4 @@ https://fathomless-waters-65385.herokuapp.com/
 
 ### Github repo
 
-https://github.com/heatherzen/myschtickkick
+https://github.com/essennejaye/myschtickkick
